@@ -20,18 +20,32 @@
   <script type="text/babel">
 
     class Box extends React.Component {
-// the componentWillMount() method hook is envoked immediately before the initial rendering i.e. before the <div> in the render() method
-// this method is a great place to load data
-      componentWillMount() {
-        alert('component is ready to mount')
+// set initial state using the constructor
+      constructor(props) {
+        super(props)
+        this.state = {
+          backgroundColor: "purple"
+        }
+        this.update = this.update.bind(this)
       }
-// the componentDidMount() method hook is envoked right after the initial mounting
-      componentDidMount() {
-        alert('compontent has just mounted')
+
+      update() {
+        this.setState({
+          backgroundColor: "green"
+        })
       }
+// the componentDidUpdate() hook method is envoked after a component has been updated
+// this method is useful to do something after the component updates
+      componentDidUpdate() {
+        alert("the component has been updated!")
+      }
+
       render() {
         return(
-          <div id="myDiv"></div>
+          <div id="myDiv"
+               style={this.state}
+               onClick={this.update}>
+          </div>
         )
       }
     }
